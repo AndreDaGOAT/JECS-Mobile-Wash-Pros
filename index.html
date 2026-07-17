@@ -1,371 +1,143 @@
-diff --git a/index.html b/index.html
-index aabf26a790bd2bddb885e427dd15ffb5c74160ff..c808c4941d51f66690f667f79163b7662c83adc9 100644
---- a/index.html
-+++ b/index.html
-@@ -1,258 +1,144 @@
- <!doctype html>
- <html lang="en">
-   <head>
-     <meta charset="UTF-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <title>Jubilee Luxury Mobile Detailing | Book, Capture Leads, Track Customers</title>
-+    <title>JECS Quick Wash Mobile Wash Pro</title>
-     <meta
-       name="description"
--      content="GitHub-ready mobile detailing business system: GitHub Pages website, Formspree lead form, Calendly booking, and HubSpot/Google Sheets CRM workflow."
-+      content="Mobile-first JECS Quick Wash technician workspace with live map, job filters, route visualization, and service request pop-ups."
-     />
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-     <link
--      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-       rel="stylesheet"
-     />
-+    <link
-+      rel="stylesheet"
-+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-+      integrity="sha256-p4NxAoJBhIINfQb6YAniH9+JfRYpQm7qRZCnsd1b3M="
-+      crossorigin=""
-+    />
-     <link rel="stylesheet" href="styles.css" />
-   </head>
-   <body>
--    <header class="site-header">
--      <div class="container nav-wrap">
--        <a class="brand" href="#home">Jubilee Luxury Mobile Detailing Co.</a>
--        <nav aria-label="Primary">
--          <ul class="nav">
--            <li><a href="#services">Services</a></li>
--            <li><a href="#quote">Quote</a></li>
--            <li><a href="#booking">Booking</a></li>
--            <li><a href="#crm">CRM</a></li>
--            <li><a href="#launch">Launch</a></li>
--          </ul>
--        </nav>
--      </div>
--    </header>
--
--    <main id="home">
--      <section class="hero section">
--        <div class="container hero-grid">
--          <div>
--            <p class="pill">Pristine Premier Mobile Detailing</p>
--            <h1>Where elite automotive care meets modern, intuitive convenience.</h1>
--            <p class="lead">
--              White-glove service starts here. We utilize a sophisticated,
--              integrated suite to ensure your experience is as polished as your vehicle.
--            </p>
--            <div class="hero-actions">
--              <a class="btn btn-primary" href="#quote">Request Quote</a>
--              <a class="btn btn-secondary" href="#booking">Book Appointment</a>
--            </div>
--            <div class="quick-contact">
--              <a id="phoneLink" href="tel:+6153487683">Call (615) 348-7683</a>
--              <a id="emailLink" href="mailto:Contact@jubileeexecutivecarservice.com"
--                >Contact@jubileeexecutivecarservice.com</a
--              >
--            </div>
--          </div>
--          <aside class="card">
--            <h2>The Client Experience</h2>
--            <ul>
--              <li><strong>Reliability:</strong> Secured by world-class cloud infrastructure</li>
--              <li><strong>Design:</strong> Bespoke, responsive interface for all devices</li>
--              <li><strong>Inquiries:</strong> Instant, encrypted communication channels</li>
--              <li><strong>Scheduling:</strong> Effortless, real-time booking management</li>
--              <li><strong>Personalization:</strong> Dedicated client profiles for tailored care</li>
--            </ul>
--          </aside>
-+    <div class="app-shell">
-+      <header class="pro-header">
-+        <div>
-+          <p class="eyebrow">Technician workspace</p>
-+          <h1>JECS Quick Wash Mobile Wash Pro</h1>
-         </div>
--      </section>
-+        <button id="refreshButton" class="btn btn-secondary" type="button">Refresh</button>
-+      </header>
- 
--      <section id="services" class="section section-alt">
--        <div class="container">
--          <h2>Packages</h2>
--          <div class="cards">
--            <article class="card">
--              <h3>Express Exterior</h3>
--              <p>Foam wash, wheels, tire shine, window clean.</p>
--              <p class="price">$89+</p>
--            </article>
--            <article class="card">
--              <h3>Interior Reset</h3>
--              <p>Vacuum, plastics, vents, fabric spot treatment.</p>
--              <p class="price">$139+</p>
--            </article>
--            <article class="card">
--              <h3>Complete Detail</h3>
--              <p>Interior + exterior + paint protection sealant.</p>
--              <p class="price">$249+</p>
--            </article>
-+      <main class="map-workspace" aria-label="Mobile Wash Pro map workspace">
-+        <aside class="filter-panel" aria-label="Job filters">
-+          <div class="panel-heading">
-+            <h2>Filter Panel</h2>
-+            <p>Map opens first so technicians can start from geography, not a table.</p>
-           </div>
--        </div>
--      </section>
- 
--      <section id="quote" class="section">
--        <div class="container two-col">
--          <div>
--            <h2>Tell Us About Your Vehicle</h2>
--            <p>
--              Please complete this quick form so we can build your quote accurately.
--              Once you submit, you will be redirected immediately to our private booking calendar to reserve your appointment.
--            </p>
--            <ol>
--              <li>Enter your contact details and service address</li>
--              <li>Describe your vehicle and detailing goals</li>
--              <li>Submit and continue straight to booking</li>
--            </ol>
--          </div>
-+          <label>
-+            Service Request Status
-+            <select id="statusFilter">
-+              <option value="all">All</option>
-+              <option value="pending">Pending</option>
-+              <option value="scheduled">Scheduled</option>
-+              <option value="assigned">Assigned</option>
-+              <option value="in progress">In Progress</option>
-+              <option value="completed">Completed</option>
-+              <option value="cancelled">Cancelled</option>
-+              <option value="reschedule requested">Reschedule Requested</option>
-+            </select>
-+          </label>
- 
--          <form
--            id="quoteForm"
--            class="form"
--            action="https://formspree.io/f/xqewgnbb"
--            method="POST"
--            novalidate
--          >
--            <label>
--              Full Name
--              <input type="text" name="name" autocomplete="name" required />
--            </label>
--            <label>
--              Phone Number
--              <input type="tel" name="phone" autocomplete="tel" required />
--            </label>
--            <label>
--              Email Address
--              <input type="email" name="email" autocomplete="email" required />
--            </label>
--            <label>
--              Vehicle
--              <select name="vehicle_type" required>
--                <option value="">Choose vehicle type</option>
--                <option>Sedan</option>
--                <option>SUV</option>
--                <option>Truck</option>
--                <option>Van</option>
--              </select>
--            </label>
--            <label>
--              Service Address
--              <input
--                id="serviceAddress"
--                type="text"
--                name="service_address"
--                placeholder="Start typing your address"
--                autocomplete="street-address"
--                required
--              />
-+          <label>
-+            ZIP Code
-+            <input id="zipFilter" type="search" placeholder="37203" inputmode="numeric" />
-+          </label>
-+
-+          <label>
-+            Appointment Date
-+            <input id="dateFilter" type="date" />
-+          </label>
-+
-+          <label>
-+            Customer Name
-+            <input id="customerFilter" type="search" placeholder="Search customer" />
-+          </label>
-+
-+          <div class="toggle-group" aria-label="Quick filters">
-+            <label class="check-row">
-+              <input id="todayOnlyFilter" type="checkbox" checked />
-+              <span>Today's Jobs Only</span>
-             </label>
--            <input id="addressPlaceId" type="hidden" name="address_place_id" />
--            <input id="addressLat" type="hidden" name="address_lat" />
--            <input id="addressLng" type="hidden" name="address_lng" />
--            <label>
--              Service Needed
--              <textarea name="request" rows="4" required></textarea>
-+            <label class="check-row">
-+              <input id="myJobsFilter" type="checkbox" checked />
-+              <span>My Assigned Jobs</span>
-             </label>
--            <input id="nextRedirect" type="hidden" name="_next" value="https://calendly.com/aarmstrong1234" />
--            <button class="btn btn-primary" type="submit">Get My Quote &amp; Book</button>
--            <p id="addressHint" class="hint">Start typing your address and select a suggestion for faster, accurate service routing.</p>
--            <p id="formMessage" class="hint" role="status" aria-live="polite"></p>
--          </form>
--        </div>
--      </section>
--
--      <section id="booking" class="section section-alt">
--        <div class="container two-col">
--          <div>
--            <h2>Reserve Your Appointment</h2>
--            <p>
--              After form submission, you will land here to choose your preferred appointment time.
--              Select the slot that works best and we will confirm everything by email and phone.
--            </p>
--            <a id="bookingLink" class="btn btn-primary" href="#" target="_blank" rel="noreferrer"
--              >Open Booking Calendar</a
--            >
--            <p class="hint">
--              Our mobile studio meticulously plans travel routes to ensure punctual,
--              white-glove service at your doorstep.
--            </p>
-           </div>
--          <div class="card">
--            <h3>The Gold Standard of Convenience</h3>
--            <ul>
--              <li>
--                <strong>Instant Confirmation:</strong> Real-time alerts and concierge reminders sent
--                directly to your device.
--              </li>
--              <li>
--                <strong>Tailored Intake:</strong> We gather your vehicle specifications in advance for a
--                customized treatment plan.
--              </li>
--              <li>
--                <strong>Service Guarantee:</strong> Transparent policies designed to respect and protect
--                your valuable time.
--              </li>
--              <li>
--                <strong>Client Continuity:</strong> We maintain a meticulous history of your vehicle’s
--                care to ensure long-term preservation.
--              </li>
--            </ul>
-+
-+          <div class="legend" aria-label="Marker color legend">
-+            <h3>Marker Colors</h3>
-+            <span><i class="dot scheduled"></i>Scheduled</span>
-+            <span><i class="dot in-progress"></i>In Progress</span>
-+            <span><i class="dot assigned"></i>Assigned</span>
-+            <span><i class="dot pending"></i>Pending</span>
-+            <span><i class="dot completed"></i>Completed</span>
-+            <span><i class="dot cancelled"></i>Cancelled</span>
-+            <span><i class="dot reschedule-requested"></i>Reschedule Requested</span>
-           </div>
--        </div>
--      </section>
-+        </aside>
- 
--      <section id="crm" class="section">
--        <div class="container two-col">
--          <div>
--            <h2>The Client Journey</h2>
--            <p>
--              We meticulously monitor every stage of your experience to ensure our gold standard
--              of service is never compromised.
--            </p>
--            <div class="pipeline">
--              <span>Initial Inquiry</span>
--              <span>Bespoke Proposal</span>
--              <span>Confirmed Reservation</span>
--              <span>The Transformation</span>
--              <span>Post-Care &amp; Curation</span>
-+        <section class="map-card" aria-label="Interactive map">
-+          <div class="map-toolbar">
-+            <div>
-+              <p class="eyebrow">Live dispatch feed</p>
-+              <h2>Interactive Map</h2>
-+            </div>
-+            <div class="toolbar-controls">
-+              <label>
-+                Filter:
-+                <select id="compactStatusFilter" aria-label="Compact status filter">
-+                  <option value="all">All</option>
-+                  <option value="pending">Pending</option>
-+                  <option value="scheduled">Scheduled</option>
-+                  <option value="assigned">Assigned</option>
-+                  <option value="in progress">In Progress</option>
-+                  <option value="completed">Completed</option>
-+                  <option value="cancelled">Cancelled</option>
-+                </select>
-+              </label>
-+              <span id="lastUpdated" class="last-updated">Ready</span>
-             </div>
-           </div>
--          <div class="card">
--            <h3>Our Commitment to Continuity</h3>
--            <p>
--              From the moment your request is received, our integrated management suite establishes
--              a dedicated profile for your vehicle. This allows us to provide a seamless transition
--              from scheduling to execution, followed by a personalized 30-day review to ensure your
--              vehicle maintains its showroom-quality finish.
--            </p>
--          </div>
--        </div>
--      </section>
- 
--      <section id="launch" class="section section-alt">
--        <div class="container">
--          <h2>GitHub Launch Checklist</h2>
--          <ul class="launch-list">
--            <li>Update settings in <code>script.js</code></li>
--            <li>Commit + push to GitHub repository</li>
--            <li>Enable GitHub Pages in repository settings</li>
--            <li>Confirm form and booking links work on live site</li>
--            <li>Connect custom domain (optional)</li>
--          </ul>
--        </div>
--      </section>
--    </main>
-+          <div id="jobMap" class="job-map" role="application" aria-label="Technician job map"></div>
- 
--    <footer class="site-footer">
--      <div class="container footer-wrap">
--        <p>© <span id="year"></span> <span id="businessName">Jubilee-Luxury-Mobile-Detailing Co.</span></p>
--        <p>Optional upgrade later: Netlify for simpler forms and automation.</p>
--      </div>
--    </footer>
-+          <div class="metrics-strip" aria-label="Daily job summary">
-+            <article>
-+              <span>Today's Jobs</span>
-+              <strong id="todayJobsCount">0</strong>
-+            </article>
-+            <article>
-+              <span>Remaining</span>
-+              <strong id="remainingJobsCount">0</strong>
-+            </article>
-+            <article>
-+              <span>Estimated Drive Time</span>
-+              <strong id="driveTime">0 min</strong>
-+            </article>
-+          </div>
-+        </section>
-+      </main>
-+    </div>
- 
-     <script
--      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARZAA619g3JlruK77Lfm8vlopcR76vRGg&libraries=places&callback=initGooglePlaces"
--      async
--      defer
-+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-+      crossorigin=""
-     ></script>
-     <script src="script.js"></script>
-   </body>
- </html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JECS Quick Wash · Mobile Wash Pro</title>
+    <meta name="description" content="Mobile-first JECS Quick Wash technician workspace with live map, job filters, route visualization, and service request pop-ups." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQb6YAniH9+JfRYpQm7qRZCnsd1b3M=" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="pro-header">
+        <div>
+          <p class="eyebrow">Field Operations · JECS Quick Wash</p>
+          <h1>Mobile Wash Pro</h1>
+        </div>
+        <div class="header-actions">
+          <span id="lastUpdated" class="last-updated">Loading…</span>
+          <button id="refreshButton" class="btn btn-secondary" type="button">↻ Refresh</button>
+        </div>
+      </header>
+
+      <main class="map-workspace" aria-label="Mobile Wash Pro workspace">
+        <!-- Filter sidebar -->
+        <aside class="filter-panel" aria-label="Job filters">
+          <div class="panel-heading">
+            <h2>Filters</h2>
+            <p>Narrow jobs by status, zone, date, or customer.</p>
+          </div>
+
+          <label>
+            Status
+            <select id="statusFilter">
+              <option value="all">All Statuses</option>
+              <option value="Requested">Requested</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="En Route">En Route</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Quality Check">Quality Check</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="Rescheduled">Rescheduled</option>
+            </select>
+          </label>
+
+          <label>
+            ZIP Code
+            <input id="zipFilter" type="search" placeholder="e.g. 37203" inputmode="numeric" />
+          </label>
+
+          <label>
+            Appointment Date
+            <input id="dateFilter" type="date" />
+          </label>
+
+          <label>
+            Customer Name
+            <input id="customerFilter" type="search" placeholder="Search customer…" />
+          </label>
+
+          <div class="toggle-group" aria-label="Quick filters">
+            <label class="check-row">
+              <input id="todayOnlyFilter" type="checkbox" checked />
+              <span>Today's Jobs Only</span>
+            </label>
+            <label class="check-row">
+              <input id="myJobsFilter" type="checkbox" />
+              <span>My Assigned Jobs</span>
+            </label>
+          </div>
+
+          <!-- Marker legend -->
+          <div class="legend" aria-label="Marker color legend">
+            <h3>Status Colors</h3>
+            <span><i class="dot requested"></i>Requested</span>
+            <span><i class="dot confirmed"></i>Confirmed</span>
+            <span><i class="dot en-route"></i>En Route</span>
+            <span><i class="dot in-progress"></i>In Progress</span>
+            <span><i class="dot quality-check"></i>Quality Check</span>
+            <span><i class="dot completed"></i>Completed</span>
+            <span><i class="dot cancelled"></i>Cancelled</span>
+            <span><i class="dot rescheduled"></i>Rescheduled</span>
+          </div>
+        </aside>
+
+        <!-- Map panel -->
+        <section class="map-card" aria-label="Interactive job map">
+          <div class="map-toolbar">
+            <div>
+              <p class="eyebrow">Live dispatch feed</p>
+              <h2>Interactive Map</h2>
+            </div>
+            <div class="toolbar-controls">
+              <label>
+                Quick filter:
+                <select id="compactStatusFilter" aria-label="Compact status filter">
+                  <option value="all">All</option>
+                  <option value="Requested">Requested</option>
+                  <option value="Confirmed">Confirmed</option>
+                  <option value="En Route">En Route</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Quality Check">Quality Check</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div id="jobMap" class="job-map" role="application" aria-label="Technician job map"></div>
+
+          <div class="metrics-strip" aria-label="Daily job summary">
+            <article>
+              <span>Today's Jobs</span>
+              <strong id="todayJobsCount">—</strong>
+            </article>
+            <article>
+              <span>Remaining</span>
+              <strong id="remainingJobsCount">—</strong>
+            </article>
+            <article>
+              <span>Completed</span>
+              <strong id="completedJobsCount">—</strong>
+            </article>
+            <article>
+              <span>Est. Drive Time</span>
+              <strong id="driveTime">—</strong>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

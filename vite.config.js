@@ -1,19 +1,7 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-
-  // IMPORTANT for GitHub Pages
-  base: '/JECS-Mobile-Wash-Pros/',
-
-  server: {
-    port: 3000,
-    open: true,
-  },
-
-  build: {
-    outDir: 'dist',
-    sourcemap: true,
-  },
+  base: "/JECS-Mobile-Wash-Pros/",
 });

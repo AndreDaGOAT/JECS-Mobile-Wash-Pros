@@ -1,0 +1,130 @@
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+.leaflet-map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.map-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Locate Button */
+.locate-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: #667eea;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.locate-btn:hover {
+  background-color: #5568d3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+}
+
+.locate-btn.locating {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+  }
+}
+
+/* Popup Styles */
+.popup-content {
+  font-size: 14px;
+}
+
+.popup-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.popup-content p {
+  margin: 4px 0;
+  color: #666;
+}
+
+.popup-btn {
+  background-color: #667eea;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.popup-btn:hover {
+  background-color: #5568d3;
+}
+
+/* Leaflet Control Adjustments */
+.leaflet-control-container .leaflet-control {
+  margin: 0;
+}
+
+.leaflet-top.leaflet-left {
+  top: 10px;
+  left: 10px;
+}
+
+.leaflet-top.leaflet-right {
+  top: 10px;
+  right: 10px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .locate-btn {
+    width: 45px;
+    height: 45px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .popup-content {
+    font-size: 12px;
+  }
+
+  .popup-content h4 {
+    font-size: 14px;
+  }
+}

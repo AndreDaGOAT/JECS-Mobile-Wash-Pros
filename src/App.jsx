@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MapComponent from './components/MapComponent';
+import CustomerMap from './components/CustomerMap';
 import ServiceBooking from './components/ServiceBooking';
 import './App.css';
 
@@ -39,8 +39,9 @@ export default function App() {
 
       <main className="app-main">
         {userLocation && (
-          <MapComponent
-            userLocation={userLocation}
+          <CustomerMap
+            initialCenter={userLocation}
+            initialZoom={12}
             onMarkerClick={handleMarkerClick}
           />
         )}

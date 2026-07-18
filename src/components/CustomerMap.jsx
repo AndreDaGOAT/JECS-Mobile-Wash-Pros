@@ -31,7 +31,7 @@ function ViewportListener({ onBoundsChange }) {
   return null
 }
 
-export default function CustomerMap({ initialCenter = [39.5, -98.35], initialZoom = 4 }) {
+export default function CustomerMap({ initialCenter = [39.5, -98.35], initialZoom = 4, onMarkerClick = null }) {
   const [customers, setCustomers] = useState([])
   const [loading, setLoading] = useState(false)
   const fetchIdRef = useRef(0)
@@ -87,7 +87,15 @@ export default function CustomerMap({ initialCenter = [39.5, -98.35], initialZoo
           const lon = parseFloat(c.longitude)
           if (Number.isNaN(lat) || Number.isNaN(lon)) return null
           return (
-            <Marker key={c.customer_id} position={[lat, lon]}>
+            <Marker
+              key={c.customer_id}
+              position={[lat, lon]}
+              eventHandlers={{
+                click: () => {
+                  if (onMarkerClick) onMarkerClick(c)
+                },
+              }}
+            >
               <Popup>
                 <div>
                   <strong>{c.full_name}</strong>

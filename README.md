@@ -6,7 +6,7 @@ A modern, mobile-first web application for managing mobile car washing services 
 
 ✨ **Interactive Maps**
 - Real-time service location tracking using Leaflet & OpenStreetMap
-- User geolocation with one-click locate feature
+- User geolocation with one-click locate feature-
 - Multiple service provider markers with distances
 
 📱 **Mobile-Optimized**
